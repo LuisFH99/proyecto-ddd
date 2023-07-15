@@ -1,6 +1,8 @@
 package com.conectaidea.recurso.infraestructura.entidad;
 
 import com.conectaidea.recurso.dominio.modelo.Recurso;
+import com.conectaidea.recurso.dominio.modelo.Tema;
+import com.conectaidea.recurso.infraestructura.adaptador.servicefeign.TemaClientRest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,9 +29,9 @@ public class RecursoEntity {
     private Long id_tema;
 
     public static RecursoEntity mapearDominioModel (Recurso recurso){
-        return new RecursoEntity(recurso.getId(), recurso.getNombre(), recurso.getDescripcion(), recurso.getRuta(), recurso.getType(), recurso.getId_tema() );
+        return new RecursoEntity(recurso.getId(), recurso.getNombre(), recurso.getDescripcion(), recurso.getRuta(), recurso.getType(), recurso.getTema().getId() );
     }
-    public Recurso toDominioModel(){
-        return new Recurso(id,nombre,descripcion, ruta,type,id_tema);
+    public Recurso toDominioModel(TemaClientRest temaClientRest){
+        return new Recurso(id,nombre,descripcion, ruta,type,temaClientRest.obtenerTema(id_tema));
     }
 }

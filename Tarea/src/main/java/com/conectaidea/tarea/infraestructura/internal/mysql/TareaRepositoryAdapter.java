@@ -1,24 +1,28 @@
-package com.conectaidea.tarea.infraestructura.repositorio.mysql;
+package com.conectaidea.tarea.infraestructura.internal.mysql;
 
 import com.conectaidea.tarea.dominio.modelo.Tarea;
 import com.conectaidea.tarea.dominio.puertos.salida.TareaRepositoryPort;
-import com.conectaidea.tarea.infraestructura.entidad.TareaEntity;
+import com.conectaidea.tarea.infraestructura.external.TemaClientRest;
+import com.conectaidea.tarea.infraestructura.internal.entidad.TareaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+@Service("serviceFeign")
 @Component
 public class TareaRepositoryAdapter implements TareaRepositoryPort {
     @Autowired
     TareaRepository tareaRepository;
+    @Autowired
+    TemaClientRest temaClientRest;
     @Override
     public Tarea save(Tarea tarea) {
         TareaEntity tareaEntity=TareaEntity.mapearDominioModel(tarea);
         TareaEntity saveTarea=tareaRepository.save(tareaEntity);
-        return saveTarea.toDominioModel();
+        return saveTarea.toDominioModel(temaClientRest);
     }
 
     @Override
@@ -29,9 +33,9 @@ public class TareaRepositoryAdapter implements TareaRepositoryPort {
             tareaEntity.setId(id);
             tareaEntity.setNombre(tarea.getNombre());
             tareaEntity.setDescripcion(tarea.getDescripcion());
-            tareaEntity.setId_tema(tarea.getId_tema());
+            tareaEntity.setId_tema(tarea.getTema().getId());
             tareaEntity = tareaRepository.save(tareaEntity);
-            return tareaEntity.toDominioModel();
+            return tareaEntity.toDominioModel(temaClientRest);
         }
         return null;
     }
@@ -44,7 +48,9 @@ public class TareaRepositoryAdapter implements TareaRepositoryPort {
 
     @Override
     public List<Tarea> getAllTarea() {
-        return tareaRepository.findAll().stream().map(TareaEntity::toDominioModel).collect(Collectors.toList());
+        return tareaRepository.findAll().stream().map(
+                t->t.toDominioModel(temaClientRest)
+        ).collect(Collectors.toList());
     }
 
     @Override
@@ -52,7 +58,7 @@ public class TareaRepositoryAdapter implements TareaRepositoryPort {
         Optional<TareaEntity> tareaEntityfind = tareaRepository.findById(id);
         if(tareaEntityfind.isPresent()){
             TareaEntity tareaEntity = tareaEntityfind.get();
-            return tareaEntity.toDominioModel();
+            return tareaEntity.toDominioModel(temaClientRest);
         }
         return null;
     }

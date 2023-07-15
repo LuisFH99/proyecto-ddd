@@ -18,5 +18,5 @@ public class Recurso {
 
     private String type;
 
-    private Long id_tema;
+    private Tema tema;
 }

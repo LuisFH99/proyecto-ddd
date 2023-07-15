@@ -37,4 +37,5 @@ public class RecursoServicio implements MantenimientoRecursoUseCase, ObtenerRecu
     public Recurso obtenerRecurso(Long id) {
         return obtenerRecursoUseCase.obtenerRecurso(id);
     }
+    
 }

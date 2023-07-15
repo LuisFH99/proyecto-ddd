@@ -1,0 +1,2 @@
+INSERT INTO calificacion(titulo, pregunta1, pregunta2, pregunta3, id_tema) VALUES ('Practica 01', 'test pregunta 01', 'test pregunta 02', 'test pregunta 03', '1');
+INSERT INTO calificacion(titulo, pregunta1, pregunta2, pregunta3, id_tema) VALUES ('Practica 02', 'test pregunta 01', 'test pregunta 02', 'test pregunta 03', '2');

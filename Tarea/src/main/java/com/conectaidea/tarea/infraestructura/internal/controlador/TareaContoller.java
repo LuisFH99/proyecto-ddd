@@ -1,4 +1,4 @@
-package com.conectaidea.tarea.infraestructura.controlador;
+package com.conectaidea.tarea.infraestructura.internal.controlador;
 
 import com.conectaidea.tarea.aplicacion.servicio.TareaServicio;
 import com.conectaidea.tarea.dominio.modelo.Tarea;

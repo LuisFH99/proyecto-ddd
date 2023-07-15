@@ -36,4 +36,5 @@ public class RecursoController {
     public Recurso obtenerRecurso(@PathVariable Long id){
         return recursoServicio.obtenerRecurso(id);
     }
+
 }

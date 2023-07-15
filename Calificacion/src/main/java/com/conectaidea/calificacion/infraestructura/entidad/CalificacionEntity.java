@@ -1,6 +1,7 @@
 package com.conectaidea.calificacion.infraestructura.entidad;
 
 import com.conectaidea.calificacion.dominio.modelo.Calificacion;
+import com.conectaidea.calificacion.infraestructura.adaptador.feignclient.TemaClientRest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,9 +28,9 @@ public class CalificacionEntity {
     private Long id_tema;
 
     public static CalificacionEntity mapearDominioModel (Calificacion calificacion){
-        return new CalificacionEntity(calificacion.getId(), calificacion.getTitulo(), calificacion.getPregunta1(), calificacion.getPregunta2(), calificacion.getPregunta3(), calificacion.getId_tema() );
+        return new CalificacionEntity(calificacion.getId(), calificacion.getTitulo(), calificacion.getPregunta1(), calificacion.getPregunta2(), calificacion.getPregunta3(), calificacion.getTema().getId() );
     }
-    public Calificacion toDominioModel(){
-        return new Calificacion(id,titulo,pregunta1, pregunta2,pregunta3,id_tema);
+    public Calificacion toDominioModel(TemaClientRest temaClientRest){
+        return new Calificacion(id,titulo,pregunta1, pregunta2,pregunta3,temaClientRest.obtenerTema(id_tema));
     }
 }

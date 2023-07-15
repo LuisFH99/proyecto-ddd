@@ -14,5 +14,5 @@ public class Tarea {
 
     private String descripcion;
 
-    private Long id_tema;
+    private Tema tema;
 }

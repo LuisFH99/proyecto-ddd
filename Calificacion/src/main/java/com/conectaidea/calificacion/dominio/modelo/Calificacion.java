@@ -18,5 +18,5 @@ public class Calificacion {
 
     private String pregunta3;
 
-    private Long id_tema;
+    private Tema tema;
 }

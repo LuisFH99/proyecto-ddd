@@ -1,23 +1,31 @@
 package com.conectaidea.recurso.infraestructura.adaptador.mysql;
 
 import com.conectaidea.recurso.dominio.modelo.Recurso;
+import com.conectaidea.recurso.dominio.modelo.Tema;
 import com.conectaidea.recurso.dominio.puertos.salida.RecursoRepositoryPort;
+import com.conectaidea.recurso.infraestructura.adaptador.servicefeign.TemaClientRest;
 import com.conectaidea.recurso.infraestructura.entidad.RecursoEntity;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+@Service("serviceFeign")
 @Component
 public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
 
     private final RecursoRepository recursoRepository;
     private final ConversionService conversionService;
 
-    public RecursoRepositoryAdapter(RecursoRepository recursoRepository,ConversionService conversionService){
+    private final TemaClientRest temaClientRest;
+
+    public RecursoRepositoryAdapter(RecursoRepository recursoRepository,ConversionService conversionService, TemaClientRest temaClientRest){
         this.recursoRepository=recursoRepository;
         this.conversionService=conversionService;
+        this.temaClientRest=temaClientRest;
     }
     @Override
     public Recurso save(Recurso recurso) {
@@ -26,7 +34,7 @@ public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
         return conversionService.convert(saveRecurso,Recurso.class);*/
         RecursoEntity recursoEntity=RecursoEntity.mapearDominioModel(recurso);
         RecursoEntity saveRecurso=recursoRepository.save(recursoEntity);
-        return saveRecurso.toDominioModel();
+        return saveRecurso.toDominioModel(temaClientRest);
     }
 
     @Override
@@ -39,10 +47,10 @@ public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
             recursoEntity.setDescripcion(recurso.getDescripcion());
             recursoEntity.setRuta(recurso.getRuta());
             recursoEntity.setType(recurso.getType());
-            recursoEntity.setId_tema(recursoEntity.getId_tema());
+            recursoEntity.setId_tema(recurso.getTema().getId());
             recursoEntity = recursoRepository.save(recursoEntity);
             /*return conversionService.convert(recursoEntity, Recurso.class);*/
-            return recursoEntity.toDominioModel();
+            return recursoEntity.toDominioModel(temaClientRest);
         }
         return null;
     }
@@ -55,7 +63,9 @@ public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
 
     @Override
     public List<Recurso> getAllRecurso() {
-        return recursoRepository.findAll().stream().map(RecursoEntity::toDominioModel).collect(Collectors.toList());
+        return recursoRepository.findAll().stream().map(
+                r->r.toDominioModel(temaClientRest)
+        ).collect(Collectors.toList());
     }
 
     @Override
@@ -63,8 +73,9 @@ public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
         Optional<RecursoEntity> recursoEntityfind = recursoRepository.findById(id);
         if(recursoEntityfind.isPresent()){
             RecursoEntity recursoEntity = recursoEntityfind.get();
-            return recursoEntity.toDominioModel();
+            return recursoEntity.toDominioModel(temaClientRest);
         }
         return null;
     }
+
 }

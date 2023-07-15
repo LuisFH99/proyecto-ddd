@@ -5,6 +5,7 @@ import com.conectaidea.recurso.aplicacion.usercase.MantenimientoRecursoUseCaseIm
 import com.conectaidea.recurso.aplicacion.usercase.ObtenerRecursoUseCaseImpl;
 import com.conectaidea.recurso.dominio.puertos.salida.RecursoRepositoryPort;
 import com.conectaidea.recurso.infraestructura.adaptador.mysql.RecursoRepositoryAdapter;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

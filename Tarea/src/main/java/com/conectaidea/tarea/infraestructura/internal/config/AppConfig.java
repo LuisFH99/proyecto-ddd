@@ -1,10 +1,11 @@
-package com.conectaidea.tarea.infraestructura.config;
+package com.conectaidea.tarea.infraestructura.internal.config;
 
 import com.conectaidea.tarea.aplicacion.servicio.TareaServicio;
 import com.conectaidea.tarea.aplicacion.usecase.MantenimientoTareaUseCaseImpl;
 import com.conectaidea.tarea.aplicacion.usecase.ObtenerTareaUseCaseImpl;
 import com.conectaidea.tarea.dominio.puertos.salida.TareaRepositoryPort;
-import com.conectaidea.tarea.infraestructura.repositorio.mysql.TareaRepositoryAdapter;
+
+import com.conectaidea.tarea.infraestructura.internal.mysql.TareaRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
