@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: servicio-tema
+          uri: lb://servicio-tema
+          predicates:
+            - Path=/api/tema/**
+        - id: servicio-calificacion
+          uri: lb://servicio-calificacion
+          predicates:
+            - Path=/api/calificacion/**
+        - id: servicio-recurso
+          uri: lb://servicio-recurso
+          predicates:
+            - Path=/api/recurso**
+        - id: servicio-tarea
+          uri: lb://servicio-tarea
+          predicates:
+            - Path=/api/tarea/**
