@@ -9,4 +9,6 @@ public interface ObtenerRecursoUseCase {
     List<Recurso> listarRecurso();
     Recurso obtenerRecurso(Long id);
 
+    List<Recurso> getRecursosTema(Long temaid);
+
 }

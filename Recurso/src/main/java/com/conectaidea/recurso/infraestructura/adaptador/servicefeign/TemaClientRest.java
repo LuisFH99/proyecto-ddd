@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @FeignClient(name = "servicio-tema",url = "http://localhost:8040/api/tema")
 public interface TemaClientRest {
     @GetMapping("/{id}")
-    public Tema obtenerTema(@PathVariable Long id);
+    Tema obtenerTema(@PathVariable Long id);
 }

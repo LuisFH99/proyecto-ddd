@@ -22,4 +22,11 @@ public class ObtenerCalificacionUseCaseImpl implements ObtenerCalificacionUseCas
     public Calificacion obtenerCalificacion(Long id) {
         return calificacionRepositoryPort.getCalificacion(id);
     }
+
+    @Override
+    public List<Calificacion> obtenerCalificacionTema(Long temaid) {
+        return calificacionRepositoryPort.getCalificacionTema(temaid);
+    }
+
+
 }

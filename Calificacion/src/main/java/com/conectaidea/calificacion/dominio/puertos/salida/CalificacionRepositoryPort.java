@@ -10,4 +10,6 @@ public interface CalificacionRepositoryPort {
     void delete(Long id);
     List<Calificacion> getAllCalificacion();
     Calificacion getCalificacion(Long id);
+
+    List<Calificacion>  getCalificacionTema(Long temaid);
 }

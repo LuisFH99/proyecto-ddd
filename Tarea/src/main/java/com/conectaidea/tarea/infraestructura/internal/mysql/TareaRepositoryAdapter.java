@@ -62,4 +62,11 @@ public class TareaRepositoryAdapter implements TareaRepositoryPort {
         }
         return null;
     }
+
+    @Override
+    public List<Tarea> getTareasTema(Long temaid) {
+        return tareaRepository.findByTemaId(temaid).stream().map(
+                t->t.toDominioModel(temaClientRest)
+        ).collect(Collectors.toList());
+    }
 }

@@ -36,4 +36,9 @@ public class TareaContoller {
     public Tarea obtenerTema(@PathVariable Long id){
         return tareaServicio.obtenerTarea(id);
     }
+
+    @GetMapping("/tema/{temaId}")
+    public List<Tarea> listarTareasTema(@PathVariable Long temaId){
+        return tareaServicio.obtenerTareasTema(temaId);
+    }
 }

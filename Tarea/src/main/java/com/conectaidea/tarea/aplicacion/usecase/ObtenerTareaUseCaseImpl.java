@@ -19,4 +19,9 @@ public class ObtenerTareaUseCaseImpl implements ObtenerTareaUseCase {
     public Tarea obtenerTarea(Long id) {
         return tareaRepositoryPort.getTarea(id);
     }
+
+    @Override
+    public List<Tarea> obtenerTareasTema(Long temaid) {
+        return tareaRepositoryPort.getTareasTema(temaid);
+    }
 }

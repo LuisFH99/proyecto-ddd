@@ -12,4 +12,6 @@ public interface RecursoRepositoryPort {
     List<Recurso> getAllRecurso();
     Recurso getRecurso(Long id);
 
+    List<Recurso>  getRecursosTema(Long temaid);
+
 }

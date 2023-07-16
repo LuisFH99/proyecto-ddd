@@ -11,4 +11,5 @@ public interface TareaRepositoryPort {
     void delete(Long id);
     List<Tarea> getAllTarea();
     Tarea getTarea(Long id);
+    List<Tarea>  getTareasTema(Long temaid);
 }

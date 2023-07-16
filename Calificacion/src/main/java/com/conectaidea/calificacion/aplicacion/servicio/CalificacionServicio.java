@@ -37,4 +37,11 @@ public class CalificacionServicio implements MantenimientoCalificacionUseCase, O
     public Calificacion obtenerCalificacion(Long id) {
         return obtenerCalificacionUseCase.obtenerCalificacion(id);
     }
+
+    @Override
+    public List<Calificacion> obtenerCalificacionTema(Long temaid) {
+        return obtenerCalificacionUseCase.obtenerCalificacionTema(temaid);
+    }
+
+
 }

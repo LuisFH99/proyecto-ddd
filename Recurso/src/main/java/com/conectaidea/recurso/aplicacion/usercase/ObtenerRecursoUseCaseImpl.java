@@ -24,4 +24,9 @@ public class ObtenerRecursoUseCaseImpl implements ObtenerRecursoUseCase {
         return recursoRepositoryPort.getRecurso(id);
     }
 
+    @Override
+    public List<Recurso>  getRecursosTema(Long temaid) {
+        return recursoRepositoryPort.getRecursosTema(temaid);
+    }
+
 }

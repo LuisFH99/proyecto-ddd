@@ -37,4 +37,10 @@ public class CalificacionController {
     public Calificacion obtenerRecurso(@PathVariable Long id){
         return calificacionServicio.obtenerCalificacion(id);
     }
+
+    @GetMapping("/tema/{temaId}")
+    public List<Calificacion> listarCalificacionTema(@PathVariable Long temaId){
+        return calificacionServicio.obtenerCalificacionTema(temaId);
+    }
+
 }

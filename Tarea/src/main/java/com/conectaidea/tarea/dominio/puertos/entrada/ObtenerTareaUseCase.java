@@ -7,4 +7,5 @@ import java.util.List;
 public interface ObtenerTareaUseCase {
     List<Tarea> listarTareas();
     Tarea obtenerTarea(Long id);
+    List<Tarea> obtenerTareasTema(Long temaid);
 }

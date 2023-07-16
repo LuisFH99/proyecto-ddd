@@ -37,4 +37,9 @@ public class RecursoController {
         return recursoServicio.obtenerRecurso(id);
     }
 
+    @GetMapping("/tema/{temaId}")
+    public List<Recurso> listarRecursosTema(@PathVariable Long temaId){
+        return recursoServicio.getRecursosTema(temaId);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.conectaidea.recurso.aplicacion.servicio;
 
 import com.conectaidea.recurso.dominio.modelo.Recurso;
+import com.conectaidea.recurso.dominio.modelo.Tema;
 import com.conectaidea.recurso.dominio.puertos.entrada.MantenimientoRecursoUseCase;
 import com.conectaidea.recurso.dominio.puertos.entrada.ObtenerRecursoUseCase;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,10 @@ public class RecursoServicio implements MantenimientoRecursoUseCase, ObtenerRecu
     public Recurso obtenerRecurso(Long id) {
         return obtenerRecursoUseCase.obtenerRecurso(id);
     }
-    
+
+    @Override
+    public List<Recurso>  getRecursosTema(Long temaid) {
+        return obtenerRecursoUseCase.getRecursosTema(temaid);
+    }
+
 }

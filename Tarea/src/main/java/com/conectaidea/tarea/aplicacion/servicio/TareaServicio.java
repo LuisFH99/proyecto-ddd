@@ -36,4 +36,9 @@ public class TareaServicio implements MantenimientoTareaUseCase, ObtenerTareaUse
     public Tarea obtenerTarea(Long id) {
         return obtenerTareaUseCase.obtenerTarea(id);
     }
+
+    @Override
+    public List<Tarea> obtenerTareasTema(Long temaid) {
+        return obtenerTareaUseCase.obtenerTareasTema(temaid);
+    }
 }

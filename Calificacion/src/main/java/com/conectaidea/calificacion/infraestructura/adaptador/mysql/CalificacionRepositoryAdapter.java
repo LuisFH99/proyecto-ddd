@@ -74,4 +74,11 @@ public class CalificacionRepositoryAdapter implements CalificacionRepositoryPort
         }
         return null;
     }
+
+    @Override
+    public List<Calificacion> getCalificacionTema(Long temaid) {
+        return calificacionRepository.findByTemaId(temaid).stream().map(
+                c-> c.toDominioModel(temaClientRest)
+        ).collect(Collectors.toList());
+    }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface ObtenerCalificacionUseCase {
     List<Calificacion> listarCalificacion();
     Calificacion obtenerCalificacion(Long id);
+
+    List<Calificacion> obtenerCalificacionTema(Long temaid);
 }

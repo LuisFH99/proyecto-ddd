@@ -1,11 +1,10 @@
 package com.conectaidea.recurso.infraestructura.adaptador.mysql;
 
 import com.conectaidea.recurso.dominio.modelo.Recurso;
-import com.conectaidea.recurso.dominio.modelo.Tema;
 import com.conectaidea.recurso.dominio.puertos.salida.RecursoRepositoryPort;
 import com.conectaidea.recurso.infraestructura.adaptador.servicefeign.TemaClientRest;
 import com.conectaidea.recurso.infraestructura.entidad.RecursoEntity;
-import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,11 @@ import java.util.stream.Collectors;
 @Component
 public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
 
-    private final RecursoRepository recursoRepository;
+    @Autowired
+    RecursoRepository recursoRepository;
+
+    @Autowired TemaClientRest temaClientRest;
+    /*private final RecursoRepository recursoRepository;
     private final ConversionService conversionService;
 
     private final TemaClientRest temaClientRest;
@@ -26,7 +29,7 @@ public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
         this.recursoRepository=recursoRepository;
         this.conversionService=conversionService;
         this.temaClientRest=temaClientRest;
-    }
+    }*/
     @Override
     public Recurso save(Recurso recurso) {
         /*var recursotm=conversionService.convert(recurso, RecursoEntity.class);
@@ -76,6 +79,13 @@ public class RecursoRepositoryAdapter implements RecursoRepositoryPort {
             return recursoEntity.toDominioModel(temaClientRest);
         }
         return null;
+    }
+
+    @Override
+    public List<Recurso>  getRecursosTema(Long temaid) {
+        return recursoRepository.findByTemaId(temaid).stream().map(
+                r->r.toDominioModel(temaClientRest)
+        ).collect(Collectors.toList());
     }
 
 }
